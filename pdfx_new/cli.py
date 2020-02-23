@@ -192,12 +192,22 @@ def main():
         refs_all = pdf.get_references()
         refs = [ref for ref in refs_all if ref.reftype in ["url", "pdf"]]
         print("\nChecking %s URLs for broken links..." % len(refs))
-        check_refs(refs)
+        result = check_refs(refs)
+
+        if args.output_file:
+            # to file (in utf-8)
+            with codecs.open(args.output_file, "w", "utf-8") as f:
+                f.write("\nChecking %s URLs for broken links..." % len(refs))
+                f.write(result)
 
     try:
         if args.download_pdfs:
-            print("\nDownloading %s pdfs to '%s'..." %
-                  (len(pdf.get_references("pdf")), args.download_pdfs))
+            if args.output_file:
+                # to file (in utf-8)
+                with codecs.open(args.output_file, "w", "utf-8") as f:
+                    f.write("\nDownloading %s pdfs to '%s'..." %(len(pdf.get_references("pdf")), args.download_pdfs))
+
+            print("\nDownloading %s pdfs to '%s'..." %(len(pdf.get_references("pdf")), args.download_pdfs))
             pdf.download_pdfs(args.download_pdfs)
             print("All done!")
     except Exception as e:
