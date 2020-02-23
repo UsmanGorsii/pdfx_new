@@ -196,7 +196,7 @@ def main():
 
         if args.output_file:
             # to file (in utf-8)
-            with codecs.open(args.output_file, "w", "utf-8") as f:
+            with codecs.open(args.output_file, "a+", "utf-8") as f:
                 f.write("\nChecking %s URLs for broken links..." % len(refs))
                 f.write(result)
 
@@ -204,7 +204,7 @@ def main():
         if args.download_pdfs:
             if args.output_file:
                 # to file (in utf-8)
-                with codecs.open(args.output_file, "w", "utf-8") as f:
+                with codecs.open(args.output_file, "a+", "utf-8") as f:
                     f.write("\nDownloading %s pdfs to '%s'..." %(len(pdf.get_references("pdf")), args.download_pdfs))
 
             print("\nDownloading %s pdfs to '%s'..." %(len(pdf.get_references("pdf")), args.download_pdfs))
