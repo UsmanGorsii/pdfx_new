@@ -89,7 +89,7 @@ def check_refs(refs, verbose=True, max_threads=MAX_THREADS_DEFAULT):
         colorprint(OKGREEN, "%s working" % len(codes["200"]))
     for c in sorted(codes):
         if c != "200":
-            total_summary += "\n" + str(FAIL) + "%s broken (reason: %s)" % (str(len(codes[c]), c))
+            total_summary += "\n" + str(FAIL) + "%s broken (reason: %s)" % (str(len(codes[c])), c)
             colorprint(FAIL, "%s broken (reason: %s)" % (len(codes[c]), c))
             for ref in codes[c]:
                 o = u"  - %s" % ref.ref
